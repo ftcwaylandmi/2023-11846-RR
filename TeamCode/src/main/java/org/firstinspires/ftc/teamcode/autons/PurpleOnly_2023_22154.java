@@ -27,25 +27,29 @@ public class PurpleOnly_2023_22154 extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Purple-only Trajectory 1, Strafe right, until color sensors can view left/right spike positions
-        Trajectory trajPOA1 = drive.trajectoryBuilder(new Pose2d(-63,36,Math.toRadians(90)))
-                .splineToSplineHeading(new Pose2d(-38,36,Math.toRadians(90)),0)
+        Trajectory trajPOA1 = drive.trajectoryBuilder(new Vector2d(-63,36))
+                .splineToSplineHeading(new Pose2d(-42,36,Math.toRadians(0)),0)
                 .build();
 
-        // Purple-only Trajectory 2, drive to Right spike position
-        Trajectory trajPOR2 = drive.trajectoryBuilder(new Pose2d(-38,36,Math.toRadians(90)),Math.toRadians(270))
-                .splineToSplineHeading(new Pose2d(-30,33,Math.toRadians(270)),Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(-36,30),Math.toRadians(270))
+        // Purple-only Trajectory 3, drive to Right spike position
+        Trajectory trajPOR2 = drive.trajectoryBuilder(new Pose2d(-41,36,Math.toRadians(225)),Math.toRadians(45))
+                .splineToSplineHeading(new Pose2d(-41,30),Math.toRadians(270))
                 .build();
 
         // Purple-only Trajectory 2, drive to Center spike position
-        Trajectory trajPOC2 = drive.trajectoryBuilder(new Pose2d(-38,36,Math.toRadians(90)),Math.toRadians(0))
-                .splineToSplineHeading(new Pose2d(-30,39,Math.toRadians(0)),Math.toRadians(0))
+        Trajectory trajPOC2 = drive.trajectoryBuilder(new Pose2d(-42,36,Math.toRadians(0)),Math.toRadians(0))
+                .splineToSplineHeading(new Pose2d(-32,33,Math.toRadians(0)),Math.toRadians(0))
                 .build();
 
         // Purple-only Trajectory 2, drive to Left spike position
-        Trajectory trajPOL2 = drive.trajectoryBuilder(new Pose2d(-38,-36,Math.toRadians(90)),Math.toRadians(90))
-                .splineTo(new Vector2d(-36,42),Math.toRadians(90))
+        Trajectory trajPOL2 = drive.trajectoryBuilder(new Pose2d(-42,-36,Math.toRadians(0)),Math.toRadians(45))
+                .splineTo(new Vector2d(-41,36),Math.toRadians(0))
                 .build();
+
+        Trajectory trajPOL3 = drive.trajectoryBuilder(new Pose2d(-41,36,Math.toRadians(45)),Math.toRadians(0))
+                .splineTo(new Vector2d(-38,48),Math.toRadians(0))
+                .build();
+
 
 
         // ~~~~~~~~~~~~~~Trajectories done~~~~~~~~~~~~~~~~~'
