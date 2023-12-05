@@ -52,21 +52,27 @@ public class ArmSubsystem {
         grabServo.setPosition(1);
     }
 
-    public void wristGrab(){
+    public void wristPickup() {
         wristServo.setPosition(armConstants.wristPickup);
     }
 
-//    public void wristScore(){
-//        wristServo.setPosition(ArmConstants.SCORE);
-//    }
-
-    public void wristSlush(double slushAdjust){
-        wristServo.setPosition(wristServo.getPosition() + slushAdjust);
-        }
-
-    public void wristUp(){
-        wristServo.setPosition(servoSlush);
+    public void wristPlace() {
+        wristServo.setPosition(armConstants.wristPlace);
     }
-
-    public void wristDown(){}
    }
+
+//    public double wristSlush(double slushAdjust){
+//        wristServo.setPosition(wristServo.getPosition() + slushAdjust);
+//        return slushAdjust;
+//    }
+//
+//    public double wristUp(){
+//        wristServo.setPosition(wristSlush(0.1));
+//       return wristUp();
+//    }
+//
+//    public double wristDown(){
+//        wristServo.setPosition(wristSlush(-0.1));
+//       return wristDown();
+//    }
+//   }

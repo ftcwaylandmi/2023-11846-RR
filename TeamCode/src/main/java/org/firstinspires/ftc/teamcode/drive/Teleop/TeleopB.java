@@ -40,14 +40,14 @@ public class TeleopB extends OpMode {
         }else if(gamepad2.right_bumper){
             armSubsystem.grabClose();
         }else if(gamepad2.left_trigger>0.1){
-            armSubsystem.wristDown();
+            armSubsystem.wristPickup();
         }else if(gamepad2.right_trigger>0.1){
-            armSubsystem.wristUp();
-        }else if(gamepad2.dpad_left){
-            armSubsystem.wristSlush(0.1);
+            armSubsystem.wristPlace();
+//        }else if(gamepad2.dpad_left){
+//            armSubsystem.wristSlush(0.1);
 //            armSubsystem.wristUp();
-        }else if(gamepad2.dpad_down){
-            armSubsystem.wristSlush(-0.1);
+//        }else if(gamepad2.dpad_down){
+//            armSubsystem.wristSlush(-0.1);
 //            armSubsystem.wristDown();
         }
     }
