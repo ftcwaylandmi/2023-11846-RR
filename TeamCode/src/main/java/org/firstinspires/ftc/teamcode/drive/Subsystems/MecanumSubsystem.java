@@ -14,6 +14,11 @@ public class MecanumSubsystem {
         rearLeft = hardwareMap.get(DcMotor.class, "left_rear");
         rearRight = hardwareMap.get(DcMotor.class, "right_rear");
 
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rearRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         Drive(0,0,0,0);
     }
 
