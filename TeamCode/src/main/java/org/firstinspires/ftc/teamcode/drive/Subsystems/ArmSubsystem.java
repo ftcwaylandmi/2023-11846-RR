@@ -59,6 +59,19 @@ public class ArmSubsystem {
     public void wristPlace() {
         wristServo.setPosition(armConstants.wristPlace);
     }
+
+    public int pivotPosition(){
+        return pivotMotor.getCurrentPosition();
+    }
+
+    public int extendPosition(){
+        return extendMotor.getCurrentPosition();
+    }
+
+    public double wristPosition(){
+        return wristServo.getPosition();
+    }
+
    }
 
 //    public double wristSlush(double slushAdjust){

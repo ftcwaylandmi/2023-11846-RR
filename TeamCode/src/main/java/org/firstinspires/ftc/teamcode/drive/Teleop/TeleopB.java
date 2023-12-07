@@ -21,8 +21,12 @@ public class TeleopB extends OpMode {
     @Override
     public void loop() {
 
-        double forward = -gamepad1.left_stick_y; // actually left stick y
-        double turn = -gamepad1.right_stick_x; // actually right stick x
+        telemetry.addData("PivotPos", armSubsystem.pivotPosition());
+        telemetry.addData("ExtendPos", armSubsystem.extendPosition());
+        telemetry.addData("WristPos", armSubsystem.wristPosition());
+        telemetry.update();
+        double forward = -gamepad1.left_stick_y;
+        double turn = -gamepad1.right_stick_x;
         double strafe = gamepad1.left_stick_x;
         double extend = gamepad2.left_stick_y;
         double pivot = -gamepad2.right_stick_y;

@@ -64,5 +64,4 @@ public class MecanumSubsystem {
         rearLeft.setPower(speeds[2]);
         rearRight.setPower(-1*speeds[3]);
     }
-
 }
