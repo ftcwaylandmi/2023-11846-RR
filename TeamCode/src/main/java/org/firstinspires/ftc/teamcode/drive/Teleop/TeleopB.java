@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.drive.Teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.drive.Subsystems.ArmConstants;
 import org.firstinspires.ftc.teamcode.drive.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.drive.Subsystems.MecanumSubsystem;
 
@@ -37,7 +38,7 @@ public class TeleopB extends OpMode {
         armSubsystem.pivotM(pivot);
         mecanumSubsystem.TeleOperatedDrive(forward, -strafe, turn);
 
-        if(gamepad2.dpad_left){
+        if(gamepad2.dpad_up){
             armSubsystem.airplaneLaunch();
         }else if(gamepad2.left_bumper){
             armSubsystem.grabOpen();
@@ -47,6 +48,23 @@ public class TeleopB extends OpMode {
             armSubsystem.wristPickup();
         }else if(gamepad2.right_trigger>0.1){
             armSubsystem.wristPlace();
+
+        if (gamepad2.b) {
+            armSubsystem.pivotM(ArmConstants.pivotPlace);
+            armSubsystem.extendM(ArmConstants.extendPlace);
+            armSubsystem.wristPlace();
+        }else if (gamepad2.y) {
+            armSubsystem.pivotM(ArmConstants.pivotHang);
+            armSubsystem.extendM(ArmConstants.extendHang);
+        }else if (gamepad2.a) {
+            armSubsystem.pivotM(ArmConstants.pivotHome);
+            armSubsystem.extendM(ArmConstants.extendHome);
+        } else if (gamepad2.x) {
+            armSubsystem.pivotM(ArmConstants.pivotPickup);
+            armSubsystem.extendM(ArmConstants.extendPickup);
+            armSubsystem.wristPickup();
+        }
+
 //        }else if(gamepad2.dpad_left){
 //            armSubsystem.wristSlush(0.1);
 //            armSubsystem.wristUp();

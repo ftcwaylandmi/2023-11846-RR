@@ -6,9 +6,9 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.armsubsystem.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.sensors.SensorSubsystem;
+import org.firstinspires.ftc.teamcode.drive.Subsystems.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.drive.Subsystems.SensorSubsystem;
 
 /*
  * This is an example of a more complex path to really test the tuning.
@@ -58,18 +58,18 @@ public class PurpleOnly_2023_22154 extends LinearOpMode {
         // ~~~~~~~~~~Start of Autonomous execution~~~~~~~~~~~
         drive.followTrajectory(trajPOA1);
         // read block position
-    if (sensorSubsystem.getFrontColor()==2){
+    if (sensorSubsystem.getColor()==2){
             drive.followTrajectory(trajPOL2);
-            armSubsystem.OpenGrabServo();
+            armSubsystem.grabOpen();
             armSubsystem.wait(1000);
         } else {
-            if (sensorSubsystem.getRearColor()==2){
+            if (sensorSubsystem.getColor()==2){
                 drive.followTrajectory(trajPOR2);
-                armSubsystem.OpenGrabServo();
+                armSubsystem.grabOpen();
                 armSubsystem.wait(1000);
             } else {
                 drive.followTrajectory(trajPOC2);
-                armSubsystem.OpenGrabServo();
+                armSubsystem.grabOpen();
                 armSubsystem.wait(1000);
             }
         }
