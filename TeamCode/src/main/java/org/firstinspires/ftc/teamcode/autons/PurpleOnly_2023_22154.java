@@ -66,17 +66,17 @@ public class PurpleOnly_2023_22154 extends LinearOpMode {
         // read block position
     if (sensorSubsystem.getColor()==2){
             drive.followTrajectory(trajPOC2);
-            armSubsystem.intakeOut();
+            armSubsystem.intakeOut(1);
             armSubsystem.wait(1000);
         } else {
             drive.followTrajectory(trajPOL2);
             if (sensorSubsystem.getColor()==2){
                 drive.followTrajectory(trajPOL3);
-                armSubsystem.intakeOut();
+                armSubsystem.intakeOut(1);
                 armSubsystem.wait(1000);
             } else {
                 drive.followTrajectory(trajPOR3);
-                armSubsystem.intakeOut();
+                armSubsystem.intakeOut(1);
                 armSubsystem.wait(1000);
             }
         }

@@ -32,8 +32,10 @@ public class TeleopB extends OpMode {
         double extend = gamepad2.left_stick_y;
         double pivot = -gamepad2.right_stick_y;
         double intake = gamepad1.right_trigger;
+        double intakeOut = gamepad1.left_trigger;
 
         armSubsystem.intakeIn(intake);
+        armSubsystem.intakeOut(intakeOut);
         armSubsystem.extendM(extend);
         armSubsystem.pivotM(pivot);
         mecanumSubsystem.TeleOperatedDrive(forward, -strafe, turn);

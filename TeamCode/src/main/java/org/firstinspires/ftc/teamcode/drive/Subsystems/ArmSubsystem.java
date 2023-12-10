@@ -26,6 +26,10 @@ public class ArmSubsystem {
         pivotMotor.setPower(0);
         extendMotor.setPower(0);
         intakeMotor.setPower(0);
+
+        extendMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        pivotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
     }
 
     public void extendM(double power) {
