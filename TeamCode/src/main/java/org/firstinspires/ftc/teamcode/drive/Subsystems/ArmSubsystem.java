@@ -36,9 +36,9 @@ public class ArmSubsystem {
         pivotMotor.setPower(power);
     }
 
-    public void intakeM(double power) {
-        intakeMotor.setPower(power);
-    }
+    public void intakeIn(double power) {intakeMotor.setPower(power);}
+
+    public void intakeOut(double power){ intakeMotor.setPower(-power);}
 
     public void airplaneLaunch() {
         launchServo.setPosition(0);
