@@ -27,12 +27,12 @@ public class PurpleOnly_2023_22154 extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Purple-only Trajectory 1, Strafe right, until color sensors can view left/right spike positions
-        Trajectory trajPOA1 = drive.trajectoryBuilder(new Pose2d(-63,36,Math.toRadians(0)))
+        Trajectory trajPOC1 = drive.trajectoryBuilder(new Pose2d(-63,36,Math.toRadians(0)))
                 .splineToSplineHeading(new Pose2d(-42,36,Math.toRadians(0)),0)
                 .build();
 
         // Purple-only Trajectory 3, drive to Right spike position
-        Trajectory trajPOR2 = drive.trajectoryBuilder(new Pose2d(-41,36,Math.toRadians(45)),Math.toRadians(225))
+        Trajectory trajPOR3 = drive.trajectoryBuilder(new Pose2d(-41,36,Math.toRadians(45)),Math.toRadians(225))
                 .splineToSplineHeading(new Pose2d(-41,35,Math.toRadians(270)),Math.toRadians(315))
                 .splineToSplineHeading(new Pose2d(-40,28,Math.toRadians(315)),Math.toRadians(315))
                 .build();
@@ -62,20 +62,21 @@ public class PurpleOnly_2023_22154 extends LinearOpMode {
 
 
         // ~~~~~~~~~~Start of Autonomous execution~~~~~~~~~~~
-        drive.followTrajectory(trajPOA1);
+        drive.followTrajectory(trajPOC1);
         // read block position
-    if (sensorSubsystem.getFrontColor()==2){
-            drive.followTrajectory(trajPOL2);
-            armSubsystem.OpenGrabServo();
+    if (sensorSubsystem.getColor()==2){
+            drive.followTrajectory(trajPOC2);
+            armSubsystem.intakeOut();
             armSubsystem.wait(1000);
         } else {
-            if (sensorSubsystem.getRearColor()==2){
-                drive.followTrajectory(trajPOR2);
-                armSubsystem.OpenGrabServo();
+            drive.followTrajectory(trajPOL2);
+            if (sensorSubsystem.getColor()==2){
+                drive.followTrajectory(trajPOL3);
+                armSubsystem.intakeOut();
                 armSubsystem.wait(1000);
             } else {
-                drive.followTrajectory(trajPOC2);
-                armSubsystem.OpenGrabServo();
+                drive.followTrajectory(trajPOR3);
+                armSubsystem.intakeOut();
                 armSubsystem.wait(1000);
             }
         }
