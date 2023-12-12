@@ -25,6 +25,7 @@ public class TeleopB extends OpMode {
         telemetry.addData("PivotPos", armSubsystem.pivotPosition());
         telemetry.addData("ExtendPos", armSubsystem.extendPosition());
         telemetry.addData("WristPos", armSubsystem.wristPosition());
+        telemetry.addData("RTrig", gamepad1.right_trigger);
         telemetry.update();
         double forward = -gamepad1.left_stick_y;
         double turn = -gamepad1.right_stick_x;
@@ -44,12 +45,17 @@ public class TeleopB extends OpMode {
             armSubsystem.airplaneLaunch();
         }else if(gamepad2.left_bumper){
             armSubsystem.grabOpen();
+            armSubsystem.grab2Open();
         }else if(gamepad2.right_bumper){
             armSubsystem.grabClose();
+            armSubsystem.grab2Close();
         }else if(gamepad2.left_trigger>0.1){
             armSubsystem.wristPickup();
-        }else if(gamepad2.right_trigger>0.1){
+            armSubsystem.wrist2Pickup();
+        }else if(gamepad2.right_trigger>0.1) {
             armSubsystem.wristPlace();
+            armSubsystem.wrist2Place();
+        }
 
         if (gamepad2.b) {
             armSubsystem.pivotM(ArmConstants.pivotPlace);
@@ -75,5 +81,3 @@ public class TeleopB extends OpMode {
 //            armSubsystem.wristDown();
         }
     }
-
-}

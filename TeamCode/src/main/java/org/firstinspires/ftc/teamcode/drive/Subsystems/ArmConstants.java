@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.drive.Subsystems;
 
+import com.acmerobotics.dashboard.config.Config;
+
+@Config
 public final class ArmConstants {
 
    public static int pivotPickup = -1820;
@@ -15,7 +18,13 @@ public final class ArmConstants {
    public static double grabPickup = 0.05;
    public static double grabPlace = 0.2;
 
-   public static double wristPickup = 0.4;
-   public static double wristPlace = 1;
+   public static double grab2Pickup = 0.05;
+   public static double grab2Place = 0.2;
+
+   public static double wristPickup = 0.65;
+   public static double wristPlace = 0.88;
+   public static double wrist2Pickup = 0.52;
+   public static double wrist2Place = 0.75;
+
 
 }

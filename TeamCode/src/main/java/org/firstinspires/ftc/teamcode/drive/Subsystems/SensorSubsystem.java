@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.Subsystems;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import android.view.TouchDelegate;
 
@@ -8,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
+@Config
 public class SensorSubsystem {
 
     public RevColorSensorV3 colorSensor;

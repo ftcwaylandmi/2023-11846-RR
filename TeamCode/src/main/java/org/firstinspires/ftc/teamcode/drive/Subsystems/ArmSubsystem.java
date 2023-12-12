@@ -1,15 +1,17 @@
 package org.firstinspires.ftc.teamcode.drive.Subsystems;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Config
 public class ArmSubsystem {
     ArmConstants armConstants;
     private DcMotor pivotMotor, extendMotor, intakeMotor;
 
-    private Servo launchServo, grabServo;
-    public Servo wristServo;
+    private Servo launchServo, grabServo, grabServo2;
+    public Servo wristServo, wristServo2;
     private double servoSlush = 0;
 
     public ArmSubsystem(HardwareMap hardwareMap) {
@@ -22,11 +24,14 @@ public class ArmSubsystem {
         grabServo = hardwareMap.get(Servo.class, "grabServo");
         launchServo = hardwareMap.get(Servo.class, "airplaneServo");
         wristServo = hardwareMap.get(Servo.class, "wristServo");
+        wristServo2 = hardwareMap.get(Servo.class, "wristServo2");
+        grabServo2 = hardwareMap.get(Servo.class, "grabServo2");
 
         pivotMotor.setPower(0);
         extendMotor.setPower(0);
         intakeMotor.setPower(0);
 
+        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         extendMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         pivotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -56,12 +61,26 @@ public class ArmSubsystem {
         grabServo.setPosition(1);
     }
 
+    public void grab2Open() {grabServo2.setPosition(0);}
+
+    public void grab2Close() {grabServo2.setPosition(1);}
+
+
+
     public void wristPickup() {
         wristServo.setPosition(armConstants.wristPickup);
     }
 
     public void wristPlace() {
         wristServo.setPosition(armConstants.wristPlace);
+    }
+
+    public void wrist2Pickup() {
+        wristServo2.setPosition(armConstants.wrist2Pickup);
+    }
+
+    public void wrist2Place() {
+        wristServo2.setPosition(armConstants.wrist2Place);
     }
 
     public int pivotPosition(){
@@ -74,6 +93,7 @@ public class ArmSubsystem {
 
     public double wristPosition(){
         return wristServo.getPosition();
+
     }
 
    }

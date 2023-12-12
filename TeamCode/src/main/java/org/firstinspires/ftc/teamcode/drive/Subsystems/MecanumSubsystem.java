@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.drive.Subsystems;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+@Config
 
 public class MecanumSubsystem {
 
