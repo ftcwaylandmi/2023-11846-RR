@@ -7,6 +7,8 @@ import org.firstinspires.ftc.teamcode.drive.Subsystems.ArmConstants;
 import org.firstinspires.ftc.teamcode.drive.Subsystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.drive.Subsystems.MecanumSubsystem;
 
+import static java.lang.Thread.sleep;
+
 
 @TeleOp(name = "TeleOpB", group = "TeleOp")
 public class TeleopB extends OpMode {
@@ -58,19 +60,21 @@ public class TeleopB extends OpMode {
         }
 
         if (gamepad2.b) {
-            armSubsystem.pivotM(ArmConstants.pivotPlace);
-            armSubsystem.extendM(ArmConstants.extendPlace);
-            armSubsystem.wristPlace();
+            armSubsystem.hangTight();
         }else if (gamepad2.y) {
-            armSubsystem.pivotM(ArmConstants.pivotHang);
-            armSubsystem.extendM(ArmConstants.extendHang);
+            armSubsystem.hangStart();
         }else if (gamepad2.a) {
             armSubsystem.pivotM(ArmConstants.pivotHome);
             armSubsystem.extendM(ArmConstants.extendHome);
         } else if (gamepad2.x) {
+            armSubsystem.pivotM(ArmConstants.pivotPlace);
+            armSubsystem.extendM(ArmConstants.extendPlace);
+            armSubsystem.wristPlace();
+            armSubsystem.wrist2Place();
             armSubsystem.pivotM(ArmConstants.pivotPickup);
             armSubsystem.extendM(ArmConstants.extendPickup);
             armSubsystem.wristPickup();
+            armSubsystem.wrist2Pickup();
         }
 
 //        }else if(gamepad2.dpad_left){

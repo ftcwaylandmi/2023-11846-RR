@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Config
 public class ArmSubsystem {
@@ -37,6 +38,27 @@ public class ArmSubsystem {
 
     }
 
+
+    private void wait(int timeoutMili) {
+        ElapsedTime timer = new ElapsedTime();
+        timer.reset();
+        while (timer.milliseconds() < timeoutMili) {
+
+        }
+    }
+
+    public void  hangStart(){
+        pivotM(armConstants.pivotHangStart);
+        wait(2000);
+        extendM(armConstants.extendHangStart);
+        wait(2000);
+    }
+    public void  hangTight(){
+        pivotM(armConstants.pivotHangTight);
+        wait(2000);
+        extendM(armConstants.extendHangTight);
+        wait(2000);
+    }
     public void extendM(double power) {
         extendMotor.setPower(power);
     }
@@ -50,20 +72,20 @@ public class ArmSubsystem {
     public void intakeOut(double power){ intakeMotor.setPower(-power);}
 
     public void airplaneLaunch() {
-        launchServo.setPosition(0);
+        launchServo.setPosition(armConstants.airplaneShoot);
     }
 
     public void grabOpen() {
-        grabServo.setPosition(0);
+        grabServo.setPosition(armConstants.grabPickup);
     }
 
     public void grabClose() {
-        grabServo.setPosition(1);
+        grabServo.setPosition(armConstants.grabPlace);
     }
 
-    public void grab2Open() {grabServo2.setPosition(0);}
+    public void grab2Open() {grabServo2.setPosition(armConstants.grab2Pickup);}
 
-    public void grab2Close() {grabServo2.setPosition(1);}
+    public void grab2Close() {grabServo2.setPosition(armConstants.grab2Place);}
 
 
 
