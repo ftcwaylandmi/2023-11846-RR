@@ -59,6 +59,7 @@ public class TeleopB extends OpMode {
             armSubsystem.wrist2Place();
         }
 
+
         if (gamepad2.b) {
             armSubsystem.hangTight();
         }else if (gamepad2.y) {
