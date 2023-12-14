@@ -26,5 +26,4 @@ public final class ArmConstants {
    public static double wrist2Pickup = 0.52;
    public static double wrist2Place = 0.75;
 
-
 }
