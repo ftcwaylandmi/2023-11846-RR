@@ -32,20 +32,22 @@ public class TeleopB extends OpMode {
         double forward = -gamepad1.left_stick_y;
         double turn = -gamepad1.right_stick_x;
         double strafe = gamepad1.left_stick_x;
-        double extend = gamepad2.left_stick_y;
-        double pivot = -gamepad2.right_stick_y;
-        double intake = gamepad1.right_trigger;
-        double intakeOut = gamepad1.left_trigger;
+//        double extend = gamepad2.left_stick_y;
+//        double pivot = -gamepad2.right_stick_y;
+//        double intake = gamepad1.right_trigger;
+//        double intakeOut = gamepad1.left_trigger;
 
-        armSubsystem.intakeIn(intake);
-        armSubsystem.intakeOut(intakeOut);
-        armSubsystem.extendM(extend);
-        armSubsystem.pivotM(pivot);
+        if (gamepad1.left_trigger>0.1){
+            armSubsystem.intakeOut(gamepad1.left_trigger);
+        }else if (gamepad1.right_trigger>0.1){
+            armSubsystem.intakeIn(gamepad1.right_trigger);
+        }else if (gamepad1.dpad_up){
+            armSubsystem.airplaneLaunch();
+        }
+
         mecanumSubsystem.TeleOperatedDrive(forward, -strafe, turn);
 
-        if(gamepad2.dpad_up){
-            armSubsystem.airplaneLaunch();
-        }else if(gamepad2.left_bumper){
+        if(gamepad2.left_bumper){
             armSubsystem.grabOpen();
             armSubsystem.grab2Open();
         }else if(gamepad2.right_bumper){
@@ -57,6 +59,10 @@ public class TeleopB extends OpMode {
         }else if(gamepad2.right_trigger>0.1) {
             armSubsystem.wristPlace();
             armSubsystem.wrist2Place();
+        }else if(gamepad2.left_stick_y>0.1){
+            armSubsystem.extendM(gamepad2.left_stick_y);
+        }else if(gamepad2.right_stick_y>0.1){
+            armSubsystem.pivotM(gamepad2.right_stick_y);
         }
 
 
@@ -65,17 +71,9 @@ public class TeleopB extends OpMode {
         }else if (gamepad2.y) {
             armSubsystem.hangStart();
         }else if (gamepad2.a) {
-            armSubsystem.pivotM(ArmConstants.pivotHome);
-            armSubsystem.extendM(ArmConstants.extendHome);
+            armSubsystem.homeRoutine();
         } else if (gamepad2.x) {
-            armSubsystem.pivotM(ArmConstants.pivotPlace);
-            armSubsystem.extendM(ArmConstants.extendPlace);
-            armSubsystem.wristPlace();
-            armSubsystem.wrist2Place();
-            armSubsystem.pivotM(ArmConstants.pivotPickup);
-            armSubsystem.extendM(ArmConstants.extendPickup);
-            armSubsystem.wristPickup();
-            armSubsystem.wrist2Pickup();
+            armSubsystem.scoringRoutine();
         }
 
 //        }else if(gamepad2.dpad_left){

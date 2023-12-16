@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.drive.Subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -32,12 +33,31 @@ public class ArmSubsystem {
         extendMotor.setPower(0);
         intakeMotor.setPower(0);
 
+        intakeMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         extendMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         pivotMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
     }
 
+    public void setOverrideMode() {
+        pivotMotor.setPower(0.0);
+        extendMotor.setPower(0.0);
+
+        pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        extendMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void setPositionMode() {
+        pivotMotor.setTargetPosition(pivotMotor.getCurrentPosition());
+        extendMotor.setTargetPosition(extendMotor.getCurrentPosition());
+
+        pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        extendMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        pivotMotor.setPower(1.0);
+        extendMotor.setPower(1.0);
+    }
 
     private void wait(int timeoutMili) {
         ElapsedTime timer = new ElapsedTime();
@@ -48,23 +68,54 @@ public class ArmSubsystem {
     }
 
     public void  hangStart(){
-        pivotM(armConstants.pivotHangStart);
+        setPositionMode();
+        pivotPos(armConstants.pivotHangStart);
         wait(2000);
-        extendM(armConstants.extendHangStart);
+        extendPos(armConstants.extendHangStart);
         wait(2000);
     }
     public void  hangTight(){
-        pivotM(armConstants.pivotHangTight);
+        setPositionMode();
+        pivotPos(armConstants.pivotHangTight);
         wait(2000);
-        extendM(armConstants.extendHangTight);
+        extendPos(armConstants.extendHangTight);
         wait(2000);
     }
+
+    public void homeRoutine(){
+        setPositionMode();
+        pivotPos(ArmConstants.pivotHome);
+        extendPos(ArmConstants.extendHome);
+    }
+    public void scoringRoutine(){
+        setPositionMode();
+        pivotPos(ArmConstants.pivotPlace);
+        extendPos(ArmConstants.extendPlace);
+        wristPlace();
+        wrist2Place();
+        pivotPos(ArmConstants.pivotPickup);
+        extendPos(ArmConstants.extendPickup);
+        wristPickup();
+        wrist2Pickup();
+    }
     public void extendM(double power) {
+        setOverrideMode();
         extendMotor.setPower(power);
     }
 
+    public void extendPos(int position) {
+        // setPositionMode();
+        extendMotor.setTargetPosition(position);
+    }
+
     public void pivotM(double power) {
+        setOverrideMode();
         pivotMotor.setPower(power);
+    }
+
+    public void pivotPos(int position) {
+        // setPositionMode();
+        pivotMotor.setTargetPosition(position);
     }
 
     public void intakeIn(double power) {intakeMotor.setPower(power);}
