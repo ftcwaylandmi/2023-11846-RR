@@ -21,6 +21,8 @@ public class TeleopB extends OpMode {
         armSubsystem = new ArmSubsystem(hardwareMap);
     }
 
+    boolean override = false;
+
     @Override
     public void loop() {
 
@@ -37,44 +39,53 @@ public class TeleopB extends OpMode {
 //        double intake = gamepad1.right_trigger;
 //        double intakeOut = gamepad1.left_trigger;
 
-        if (gamepad1.left_trigger>0.1){
+        if (gamepad1.left_trigger > 0.1) {
             armSubsystem.intakeOut(gamepad1.left_trigger);
-        }else if (gamepad1.right_trigger>0.1){
+        } else if (gamepad1.right_trigger > 0.1) {
             armSubsystem.intakeIn(gamepad1.right_trigger);
-        }else if (gamepad1.dpad_up){
+        } else if (gamepad1.dpad_up) {
             armSubsystem.airplaneLaunch();
         }
-
         mecanumSubsystem.TeleOperatedDrive(forward, -strafe, turn);
 
-        if(gamepad2.left_bumper){
+        if (gamepad2.left_trigger < 0.1) {
+            if (override) {
+                armSubsystem.setPositionMode();
+            }
+            override = false;
+            if (gamepad2.x) {
+                armSubsystem.scoringRoutine();
+            }else if (gamepad2.a) {
+                armSubsystem.homeRoutine();
+            }else if (gamepad2.b) {
+                armSubsystem.hangTight();
+            }else if (gamepad2.y) {
+                armSubsystem.hangStart();
+            }
+    }else if (gamepad2.left_trigger > 0.1){
+            if(!override){
+                armSubsystem.setOverrideMode();
+            }
+            override = true;
+            armSubsystem.extendM(gamepad2.left_stick_y);
+            armSubsystem.pivotM(gamepad2.right_stick_y);
+    }
+
+            if(gamepad2.left_bumper){
             armSubsystem.grabOpen();
             armSubsystem.grab2Open();
         }else if(gamepad2.right_bumper){
             armSubsystem.grabClose();
             armSubsystem.grab2Close();
-        }else if(gamepad2.left_trigger>0.1){
+        }else if (gamepad1.dpad_left) {
             armSubsystem.wristPickup();
             armSubsystem.wrist2Pickup();
-        }else if(gamepad2.right_trigger>0.1) {
+        }else if(gamepad2.dpad_right) {
             armSubsystem.wristPlace();
             armSubsystem.wrist2Place();
-        }else if(gamepad2.left_stick_y>0.1){
-            armSubsystem.extendM(gamepad2.left_stick_y);
-        }else if(gamepad2.right_stick_y>0.1){
-            armSubsystem.pivotM(gamepad2.right_stick_y);
         }
 
 
-        if (gamepad2.b) {
-            armSubsystem.hangTight();
-        }else if (gamepad2.y) {
-            armSubsystem.hangStart();
-        }else if (gamepad2.a) {
-            armSubsystem.homeRoutine();
-        } else if (gamepad2.x) {
-            armSubsystem.scoringRoutine();
-        }
 
 //        }else if(gamepad2.dpad_left){
 //            armSubsystem.wristSlush(0.1);
